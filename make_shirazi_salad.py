@@ -1,6 +1,9 @@
 # by Kami Bigdely
 # Consolidate conditional expressions
 
+from sqlalchemy import true
+
+
 def dice(ingredients):
     print("diced all ingredients.")
 def mix_all(diced_ingredients):
@@ -10,19 +13,22 @@ def add_salt():
 def pour(liquid):
     print('poured', liquid + '.',)
 
+def check_required_ingredients(ingredients):
+    required_ingredients = ['cucumber', 'tomato', 'lemon juice', 'onion']
+    missing = 0
+    for ingredient in required_ingredients:
+        if ingredient not in ingredients:
+            missing += 1
+    if missing > 0:
+        return True
+    else:
+        return False 
+
 def make_shirazi_salad(ingredients):
-    if 'cucumber' not in ingredients:
+    if check_required_ingredients(ingredients):
         print('lacks ingredients.')
         return
-    if 'tomato' not in ingredients:
-        print('lacks ingredients.')
-        return
-    if 'onion' not in ingredients:
-        print('lacks ingredients.')
-        return
-    if 'lemon juice' not in ingredients:
-        print('lacks ingredients.')
-        return
+        
     dice(ingredients)
     mix_all(ingredients)
     add_salt()
